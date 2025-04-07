@@ -1,0 +1,44 @@
+In the first step we will look at working with api's with the "requests library"
+
+```python
+    a simple script for fething data from an api endpoing {
+        
+        import requests
+
+        url = "https://jsonplaceholder.typicode.com/posts/1"  # A test API
+        response = requests.get(url)
+
+        print("Status Code:", response.status_code) # gets the status_code
+        print("Response Body:", response.json())  # Converts the response to a dictionary
+
+
+    }
+
+    a simple script for sending data to an endpoint with "post" {
+
+        data = {
+            "title": "DevOps Automation",
+            "body": "Python is powerful for automation!",
+            "userId": 1
+        } # json data to send to endpoint
+
+        # sending code to endpoint
+        response = requests.post("https://jsonplaceholder.typicode.com/posts", json=data)
+
+        print("Status Code:", response.status_code)
+        print("Response Body:", response.json())
+
+    }
+🛠 Hands-on Challenge
+🔹 Find a real API (e.g., weather API, GitHub API) and:
+✅ Send a GET request.
+✅ Parse the JSON response.
+✅ Send a POST request (if applicable).
+
+Try this and let me know what API you want to explore next! 🚀
+    ``` 
+        for this assingment, i will use my django week one project as api endpoint.
+        lets send some weather data and use the same system_health app to send health data, 
+        I will modify the web server  to return response of all cpu usage, parse and extract 
+        usage that is above 75%
+    ```
