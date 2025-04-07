@@ -42,3 +42,59 @@ Try this and let me know what API you want to explore next! 🚀
         I will modify the web server  to return response of all cpu usage, parse and extract 
         usage that is above 75%
     ```
+
+
+- Working with paramiko for ssh access in python
+
+    a simple python script to connect ssh with paramiko {
+
+        import paramiko
+
+        hostname = "your-server-ip"      # Replace with your server's IP
+        username = "your-username"       # Replace with your SSH username
+        password = "your-password"       # Replace with your SSH password
+
+        # Create an SSH client
+        client = paramiko.SSHClient() # very important, after setting up creds, initiate a client
+
+        # Automatically add the server's host key if it's missing
+        client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+        # Connect to the server
+        client.connect(hostname, username=username, password=password)
+
+        # Execute a command
+        stdin, stdout, stderr = client.exec_command("ls -l /var/log")
+
+        # Print the output of the command
+        print(stdout.read().decode())  # Reading and printing the output
+
+        # Close the SSH connection
+        client.close()
+
+    }
+
+# INSTALLING AND CONFIGURING BOTO3
+- In this section we will work with boto3 library
+
+    a simple python code to list all running aws instances
+
+    ```python
+    import boto3
+
+    # Create an EC2 client
+    ec2 = boto3.client("ec2")
+
+    # Get all running instances
+    response = ec2.describe_instances(Filters=[{"Name": "instance-state-name", "Values": ["running"]}])
+
+    # Print instance IDs
+    for reservation in response["Reservations"]:
+        for instance in reservation["Instances"]:
+            print(f"Instance ID: {instance['InstanceId']}, State: {instance['State']['Name']}")
+
+    ```
+    # Here we used the boto3 library to get all ec2 instances and filter it with running instances
+
+    - We have successfully built a script that extracts all our ec2 instances, gets their cpu usage from 
+        cloud watch metric and either starts or stops them based on their metrics
